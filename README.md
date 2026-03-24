@@ -20,3 +20,44 @@ Once you click "Commit" on GitHub and see manifest.json sitting in your reposito
 
 # WildFinnAdventures
 Bocas del Toro Guide
+const CACHE_NAME = 'wild-finn-core-v2';
+const CORE_ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './sw.js'
+];
+
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Wild Finn: Caching Core Assets");
+      return cache.addAll(CORE_ASSETS);
+    })
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) return caches.delete(cache);
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      return cachedResponse || fetch(event.request);
+    }).catch(() => {
+      console.error("Master Audit: Network failure and asset not in cache.");
+    })
+  );
+});
+
+
