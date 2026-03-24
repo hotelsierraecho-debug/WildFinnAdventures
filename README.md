@@ -75,7 +75,31 @@ self.addEventListener('fetch', (event) => {
     <meta name="apple-mobile-web-app-title" content="Wild Finn">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/compass--v1.png">
 
-    <style>
+  {
+  "name": "Wild Finn: Artisan's Adventure",
+  "short_name": "Wild Finn",
+  "description": "Biological Intelligence & Lead Guide Survival for Bocas del Toro.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#27ae60",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/color/192/compass--v1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://img.icons8.com/color/512/compass--v1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+
+<style>
         /* THE ARTISAN AESTHETIC */
         :root {
             --bg: #121212; --surface: #1e1e1e; --surface-border: #333;
